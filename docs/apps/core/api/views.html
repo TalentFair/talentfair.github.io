@@ -45,6 +45,9 @@
                    pattern=".+" required>
 
 
+            <h2>Submodules</h2>
+            <ul>
+            </ul>
 
             <h2>API Documentation</h2>
                 <ul class="memberlist">
@@ -52,11 +55,14 @@
                     <a class="function" href="#health_check">health_check</a>
             </li>
             <li>
-                    <a class="function" href="#fetch_jobs">fetch_jobs</a>
+                    <a class="function" href="#fetch_jobs_test">fetch_jobs_test</a>
             </li>
             <li>
                     <a class="class" href="#ValidateResumeView">ValidateResumeView</a>
                             <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#ValidateResumeView.permission_classes">permission_classes</a>
+                        </li>
                         <li>
                                 <a class="variable" href="#ValidateResumeView.serializer_class">serializer_class</a>
                         </li>
@@ -71,6 +77,9 @@
                             <ul class="memberlist">
                         <li>
                                 <a class="variable" href="#FetchJobsView.serializer_class">serializer_class</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#FetchJobsView.permission_classes">permission_classes</a>
                         </li>
                         <li>
                                 <a class="function" href="#FetchJobsView.get">get</a>
@@ -92,14 +101,14 @@
     <main class="pdoc">
             <section class="module-info">
                     <h1 class="modulename">
-<a href="./../../../apps.html">apps</a><wbr>.core<wbr>.api<wbr>.views    </h1>
+apps<wbr>.core<wbr>.api<wbr>.views    </h1>
 
                         <div class="docstring"><p>Views for the core API module.</p>
 </div>
 
-                        <input id="mod-views-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                        <input id="mod-apps.core.api.views-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 
-                        <label class="view-source-button" for="mod-views-view-source"><span>View Source</span></label>
+                        <label class="view-source-button" for="mod-apps.core.api.views-view-source"><span>View Source</span></label>
 
                         <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;Views for the core API module.&quot;&quot;&quot;</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
@@ -122,67 +131,70 @@
 </span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>
 </span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
 </span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="nd">@api_view</span><span class="p">([</span><span class="s2">&quot;GET&quot;</span><span class="p">])</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="k">def</span><span class="w"> </span><span class="nf">fetch_jobs</span><span class="p">(</span><span class="n">_request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch available jobs.&quot;&quot;&quot;</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;healthy&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="nd">@permission_classes</span><span class="p">([</span><span class="n">AllowAny</span><span class="p">])</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="k">def</span><span class="w"> </span><span class="nf">fetch_jobs_test</span><span class="p">(</span><span class="n">_request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch available jobs.&quot;&quot;&quot;</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;healthy&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
 </span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="k">class</span><span class="w"> </span><span class="nc">ValidateResumeView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate uploaded resume files for format and content requirements.&quot;&quot;&quot;</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ResumeValidationSerializer</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the uploaded resume file.</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="sd">        Args:</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="sd">            request: The HTTP request object containing the file to validate.</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="sd">        Returns:</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a><span class="sd">            Response with success status and optional error message.</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>            <span class="p">)</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>        <span class="n">file</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>        <span class="n">validation_service</span> <span class="o">=</span> <span class="n">ResumeValidationService</span><span class="p">()</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">validation_service</span><span class="o">.</span><span class="n">validate_resume</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">error_message</span><span class="p">},</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>            <span class="p">)</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="k">class</span><span class="w"> </span><span class="nc">ValidateResumeView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate uploaded resume files for format and content requirements.&quot;&quot;&quot;</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">AllowAny</span><span class="p">]</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ResumeValidationSerializer</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the uploaded resume file.</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="sd">        Args:</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="sd">            request: The HTTP request object containing the file to validate.</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="sd">        Returns:</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="sd">            Response with success status and optional error message.</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>            <span class="p">)</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>        <span class="n">file</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>        <span class="n">validation_service</span> <span class="o">=</span> <span class="n">ResumeValidationService</span><span class="p">()</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">validation_service</span><span class="o">.</span><span class="n">validate_resume</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">error_message</span><span class="p">},</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>            <span class="p">)</span>
 </span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a><span class="k">class</span><span class="w"> </span><span class="nc">FetchJobsView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch jobs endpoint.&quot;&quot;&quot;</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">FetchJobsSerializer</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a><span class="k">class</span><span class="w"> </span><span class="nc">FetchJobsView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch jobs endpoint.&quot;&quot;&quot;</span>
 </span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch jobs from specified sources.</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>
-</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a><span class="sd">        Args:</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a><span class="sd">            request: The HTTP request object.</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>
-</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a><span class="sd">        Returns:</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a><span class="sd">            Response containing list of jobs.</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>        <span class="n">sources</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s2">&quot;sources&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;talentfair&quot;</span><span class="p">])</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>
-</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>        <span class="n">service</span> <span class="o">=</span> <span class="n">JobFetchingService</span><span class="p">()</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>        <span class="n">jobs</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">get_jobs</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>
-</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>        <span class="n">serialized_data</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># type: ignore[reportUnknownVariableType]</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serialized_data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">FetchJobsSerializer</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">AllowAny</span><span class="p">]</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch jobs from specified sources.</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>
+</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a><span class="sd">        Args:</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a><span class="sd">            request: The HTTP request object.</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>
+</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a><span class="sd">        Returns:</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a><span class="sd">            Response containing list of jobs.</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>        <span class="n">sources</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s2">&quot;sources&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;talentfair&quot;</span><span class="p">])</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>        <span class="n">service</span> <span class="o">=</span> <span class="n">JobFetchingService</span><span class="p">()</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>        <span class="n">jobs</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">get_jobs</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>
+</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a>        <span class="n">serialized_data</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># type: ignore[reportUnknownVariableType]</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serialized_data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -215,26 +227,26 @@
 
 
                 </section>
-                <section id="fetch_jobs">
-                            <input id="fetch_jobs-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="fetch_jobs_test">
+                            <input id="fetch_jobs_test-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">fetch_jobs</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">request</span>, </span><span class="param"><span class="o">*</span><span class="n">args</span>, </span><span class="param"><span class="o">**</span><span class="n">kwargs</span></span><span class="return-annotation">):</span></span>
+        <span class="name">fetch_jobs_test</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">request</span>, </span><span class="param"><span class="o">*</span><span class="n">args</span>, </span><span class="param"><span class="o">**</span><span class="n">kwargs</span></span><span class="return-annotation">):</span></span>
 
-                <label class="view-source-button" for="fetch_jobs-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="fetch_jobs_test-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#fetch_jobs"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="fetch_jobs-97"><a href="#fetch_jobs-97"><span class="linenos"> 97</span></a>        <span class="k">def</span><span class="w"> </span><span class="nf">view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="fetch_jobs-98"><a href="#fetch_jobs-98"><span class="linenos"> 98</span></a>            <span class="bp">self</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">initkwargs</span><span class="p">)</span>
-</span><span id="fetch_jobs-99"><a href="#fetch_jobs-99"><span class="linenos"> 99</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="fetch_jobs-100"><a href="#fetch_jobs-100"><span class="linenos">100</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;request&quot;</span><span class="p">):</span>
-</span><span id="fetch_jobs-101"><a href="#fetch_jobs-101"><span class="linenos">101</span></a>                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
-</span><span id="fetch_jobs-102"><a href="#fetch_jobs-102"><span class="linenos">102</span></a>                    <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> instance has no &#39;request&#39; attribute. Did you override &quot;</span>
-</span><span id="fetch_jobs-103"><a href="#fetch_jobs-103"><span class="linenos">103</span></a>                    <span class="s2">&quot;setup() and forget to call super()?&quot;</span> <span class="o">%</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span>
-</span><span id="fetch_jobs-104"><a href="#fetch_jobs-104"><span class="linenos">104</span></a>                <span class="p">)</span>
-</span><span id="fetch_jobs-105"><a href="#fetch_jobs-105"><span class="linenos">105</span></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <a class="headerlink" href="#fetch_jobs_test"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="fetch_jobs_test-97"><a href="#fetch_jobs_test-97"><span class="linenos"> 97</span></a>        <span class="k">def</span><span class="w"> </span><span class="nf">view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="fetch_jobs_test-98"><a href="#fetch_jobs_test-98"><span class="linenos"> 98</span></a>            <span class="bp">self</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">initkwargs</span><span class="p">)</span>
+</span><span id="fetch_jobs_test-99"><a href="#fetch_jobs_test-99"><span class="linenos"> 99</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="fetch_jobs_test-100"><a href="#fetch_jobs_test-100"><span class="linenos">100</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;request&quot;</span><span class="p">):</span>
+</span><span id="fetch_jobs_test-101"><a href="#fetch_jobs_test-101"><span class="linenos">101</span></a>                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+</span><span id="fetch_jobs_test-102"><a href="#fetch_jobs_test-102"><span class="linenos">102</span></a>                    <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> instance has no &#39;request&#39; attribute. Did you override &quot;</span>
+</span><span id="fetch_jobs_test-103"><a href="#fetch_jobs_test-103"><span class="linenos">103</span></a>                    <span class="s2">&quot;setup() and forget to call super()?&quot;</span> <span class="o">%</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span>
+</span><span id="fetch_jobs_test-104"><a href="#fetch_jobs_test-104"><span class="linenos">104</span></a>                <span class="p">)</span>
+</span><span id="fetch_jobs_test-105"><a href="#fetch_jobs_test-105"><span class="linenos">105</span></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -254,38 +266,39 @@
 
     </div>
     <a class="headerlink" href="#ValidateResumeView"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ValidateResumeView-28"><a href="#ValidateResumeView-28"><span class="linenos">28</span></a><span class="k">class</span><span class="w"> </span><span class="nc">ValidateResumeView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
-</span><span id="ValidateResumeView-29"><a href="#ValidateResumeView-29"><span class="linenos">29</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate uploaded resume files for format and content requirements.&quot;&quot;&quot;</span>
-</span><span id="ValidateResumeView-30"><a href="#ValidateResumeView-30"><span class="linenos">30</span></a>
-</span><span id="ValidateResumeView-31"><a href="#ValidateResumeView-31"><span class="linenos">31</span></a>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ResumeValidationSerializer</span>
-</span><span id="ValidateResumeView-32"><a href="#ValidateResumeView-32"><span class="linenos">32</span></a>
-</span><span id="ValidateResumeView-33"><a href="#ValidateResumeView-33"><span class="linenos">33</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
-</span><span id="ValidateResumeView-34"><a href="#ValidateResumeView-34"><span class="linenos">34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the uploaded resume file.</span>
-</span><span id="ValidateResumeView-35"><a href="#ValidateResumeView-35"><span class="linenos">35</span></a>
-</span><span id="ValidateResumeView-36"><a href="#ValidateResumeView-36"><span class="linenos">36</span></a><span class="sd">        Args:</span>
-</span><span id="ValidateResumeView-37"><a href="#ValidateResumeView-37"><span class="linenos">37</span></a><span class="sd">            request: The HTTP request object containing the file to validate.</span>
-</span><span id="ValidateResumeView-38"><a href="#ValidateResumeView-38"><span class="linenos">38</span></a>
-</span><span id="ValidateResumeView-39"><a href="#ValidateResumeView-39"><span class="linenos">39</span></a><span class="sd">        Returns:</span>
-</span><span id="ValidateResumeView-40"><a href="#ValidateResumeView-40"><span class="linenos">40</span></a><span class="sd">            Response with success status and optional error message.</span>
-</span><span id="ValidateResumeView-41"><a href="#ValidateResumeView-41"><span class="linenos">41</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="ValidateResumeView-42"><a href="#ValidateResumeView-42"><span class="linenos">42</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-</span><span id="ValidateResumeView-43"><a href="#ValidateResumeView-43"><span class="linenos">43</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
-</span><span id="ValidateResumeView-44"><a href="#ValidateResumeView-44"><span class="linenos">44</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
-</span><span id="ValidateResumeView-45"><a href="#ValidateResumeView-45"><span class="linenos">45</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
-</span><span id="ValidateResumeView-46"><a href="#ValidateResumeView-46"><span class="linenos">46</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
-</span><span id="ValidateResumeView-47"><a href="#ValidateResumeView-47"><span class="linenos">47</span></a>            <span class="p">)</span>
-</span><span id="ValidateResumeView-48"><a href="#ValidateResumeView-48"><span class="linenos">48</span></a>
-</span><span id="ValidateResumeView-49"><a href="#ValidateResumeView-49"><span class="linenos">49</span></a>        <span class="n">file</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span>
-</span><span id="ValidateResumeView-50"><a href="#ValidateResumeView-50"><span class="linenos">50</span></a>        <span class="n">validation_service</span> <span class="o">=</span> <span class="n">ResumeValidationService</span><span class="p">()</span>
-</span><span id="ValidateResumeView-51"><a href="#ValidateResumeView-51"><span class="linenos">51</span></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">validation_service</span><span class="o">.</span><span class="n">validate_resume</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span id="ValidateResumeView-52"><a href="#ValidateResumeView-52"><span class="linenos">52</span></a>
-</span><span id="ValidateResumeView-53"><a href="#ValidateResumeView-53"><span class="linenos">53</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
-</span><span id="ValidateResumeView-54"><a href="#ValidateResumeView-54"><span class="linenos">54</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
-</span><span id="ValidateResumeView-55"><a href="#ValidateResumeView-55"><span class="linenos">55</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">error_message</span><span class="p">},</span>
-</span><span id="ValidateResumeView-56"><a href="#ValidateResumeView-56"><span class="linenos">56</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
-</span><span id="ValidateResumeView-57"><a href="#ValidateResumeView-57"><span class="linenos">57</span></a>            <span class="p">)</span>
-</span><span id="ValidateResumeView-58"><a href="#ValidateResumeView-58"><span class="linenos">58</span></a>
-</span><span id="ValidateResumeView-59"><a href="#ValidateResumeView-59"><span class="linenos">59</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ValidateResumeView-29"><a href="#ValidateResumeView-29"><span class="linenos">29</span></a><span class="k">class</span><span class="w"> </span><span class="nc">ValidateResumeView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+</span><span id="ValidateResumeView-30"><a href="#ValidateResumeView-30"><span class="linenos">30</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate uploaded resume files for format and content requirements.&quot;&quot;&quot;</span>
+</span><span id="ValidateResumeView-31"><a href="#ValidateResumeView-31"><span class="linenos">31</span></a>
+</span><span id="ValidateResumeView-32"><a href="#ValidateResumeView-32"><span class="linenos">32</span></a>    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">AllowAny</span><span class="p">]</span>
+</span><span id="ValidateResumeView-33"><a href="#ValidateResumeView-33"><span class="linenos">33</span></a>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ResumeValidationSerializer</span>
+</span><span id="ValidateResumeView-34"><a href="#ValidateResumeView-34"><span class="linenos">34</span></a>
+</span><span id="ValidateResumeView-35"><a href="#ValidateResumeView-35"><span class="linenos">35</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+</span><span id="ValidateResumeView-36"><a href="#ValidateResumeView-36"><span class="linenos">36</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the uploaded resume file.</span>
+</span><span id="ValidateResumeView-37"><a href="#ValidateResumeView-37"><span class="linenos">37</span></a>
+</span><span id="ValidateResumeView-38"><a href="#ValidateResumeView-38"><span class="linenos">38</span></a><span class="sd">        Args:</span>
+</span><span id="ValidateResumeView-39"><a href="#ValidateResumeView-39"><span class="linenos">39</span></a><span class="sd">            request: The HTTP request object containing the file to validate.</span>
+</span><span id="ValidateResumeView-40"><a href="#ValidateResumeView-40"><span class="linenos">40</span></a>
+</span><span id="ValidateResumeView-41"><a href="#ValidateResumeView-41"><span class="linenos">41</span></a><span class="sd">        Returns:</span>
+</span><span id="ValidateResumeView-42"><a href="#ValidateResumeView-42"><span class="linenos">42</span></a><span class="sd">            Response with success status and optional error message.</span>
+</span><span id="ValidateResumeView-43"><a href="#ValidateResumeView-43"><span class="linenos">43</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="ValidateResumeView-44"><a href="#ValidateResumeView-44"><span class="linenos">44</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</span><span id="ValidateResumeView-45"><a href="#ValidateResumeView-45"><span class="linenos">45</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+</span><span id="ValidateResumeView-46"><a href="#ValidateResumeView-46"><span class="linenos">46</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+</span><span id="ValidateResumeView-47"><a href="#ValidateResumeView-47"><span class="linenos">47</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+</span><span id="ValidateResumeView-48"><a href="#ValidateResumeView-48"><span class="linenos">48</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
+</span><span id="ValidateResumeView-49"><a href="#ValidateResumeView-49"><span class="linenos">49</span></a>            <span class="p">)</span>
+</span><span id="ValidateResumeView-50"><a href="#ValidateResumeView-50"><span class="linenos">50</span></a>
+</span><span id="ValidateResumeView-51"><a href="#ValidateResumeView-51"><span class="linenos">51</span></a>        <span class="n">file</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span>
+</span><span id="ValidateResumeView-52"><a href="#ValidateResumeView-52"><span class="linenos">52</span></a>        <span class="n">validation_service</span> <span class="o">=</span> <span class="n">ResumeValidationService</span><span class="p">()</span>
+</span><span id="ValidateResumeView-53"><a href="#ValidateResumeView-53"><span class="linenos">53</span></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">validation_service</span><span class="o">.</span><span class="n">validate_resume</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span><span id="ValidateResumeView-54"><a href="#ValidateResumeView-54"><span class="linenos">54</span></a>
+</span><span id="ValidateResumeView-55"><a href="#ValidateResumeView-55"><span class="linenos">55</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
+</span><span id="ValidateResumeView-56"><a href="#ValidateResumeView-56"><span class="linenos">56</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+</span><span id="ValidateResumeView-57"><a href="#ValidateResumeView-57"><span class="linenos">57</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">error_message</span><span class="p">},</span>
+</span><span id="ValidateResumeView-58"><a href="#ValidateResumeView-58"><span class="linenos">58</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
+</span><span id="ValidateResumeView-59"><a href="#ValidateResumeView-59"><span class="linenos">59</span></a>            <span class="p">)</span>
+</span><span id="ValidateResumeView-60"><a href="#ValidateResumeView-60"><span class="linenos">60</span></a>
+</span><span id="ValidateResumeView-61"><a href="#ValidateResumeView-61"><span class="linenos">61</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -293,6 +306,18 @@
 </div>
 
 
+                            <div id="ValidateResumeView.permission_classes" class="classattr">
+                                <div class="attr variable">
+            <span class="name">permission_classes</span>        =
+<span class="default_value">[&lt;class &#39;rest_framework.permissions.AllowAny&#39;&gt;]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#ValidateResumeView.permission_classes"></a>
+    
+    
+
+                            </div>
                             <div id="ValidateResumeView.serializer_class" class="classattr">
                                 <div class="attr variable">
             <span class="name">serializer_class</span>        =
@@ -316,49 +341,43 @@
 
     </div>
     <a class="headerlink" href="#ValidateResumeView.post"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ValidateResumeView.post-33"><a href="#ValidateResumeView.post-33"><span class="linenos">33</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
-</span><span id="ValidateResumeView.post-34"><a href="#ValidateResumeView.post-34"><span class="linenos">34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the uploaded resume file.</span>
-</span><span id="ValidateResumeView.post-35"><a href="#ValidateResumeView.post-35"><span class="linenos">35</span></a>
-</span><span id="ValidateResumeView.post-36"><a href="#ValidateResumeView.post-36"><span class="linenos">36</span></a><span class="sd">        Args:</span>
-</span><span id="ValidateResumeView.post-37"><a href="#ValidateResumeView.post-37"><span class="linenos">37</span></a><span class="sd">            request: The HTTP request object containing the file to validate.</span>
-</span><span id="ValidateResumeView.post-38"><a href="#ValidateResumeView.post-38"><span class="linenos">38</span></a>
-</span><span id="ValidateResumeView.post-39"><a href="#ValidateResumeView.post-39"><span class="linenos">39</span></a><span class="sd">        Returns:</span>
-</span><span id="ValidateResumeView.post-40"><a href="#ValidateResumeView.post-40"><span class="linenos">40</span></a><span class="sd">            Response with success status and optional error message.</span>
-</span><span id="ValidateResumeView.post-41"><a href="#ValidateResumeView.post-41"><span class="linenos">41</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="ValidateResumeView.post-42"><a href="#ValidateResumeView.post-42"><span class="linenos">42</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-</span><span id="ValidateResumeView.post-43"><a href="#ValidateResumeView.post-43"><span class="linenos">43</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
-</span><span id="ValidateResumeView.post-44"><a href="#ValidateResumeView.post-44"><span class="linenos">44</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
-</span><span id="ValidateResumeView.post-45"><a href="#ValidateResumeView.post-45"><span class="linenos">45</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
-</span><span id="ValidateResumeView.post-46"><a href="#ValidateResumeView.post-46"><span class="linenos">46</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
-</span><span id="ValidateResumeView.post-47"><a href="#ValidateResumeView.post-47"><span class="linenos">47</span></a>            <span class="p">)</span>
-</span><span id="ValidateResumeView.post-48"><a href="#ValidateResumeView.post-48"><span class="linenos">48</span></a>
-</span><span id="ValidateResumeView.post-49"><a href="#ValidateResumeView.post-49"><span class="linenos">49</span></a>        <span class="n">file</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span>
-</span><span id="ValidateResumeView.post-50"><a href="#ValidateResumeView.post-50"><span class="linenos">50</span></a>        <span class="n">validation_service</span> <span class="o">=</span> <span class="n">ResumeValidationService</span><span class="p">()</span>
-</span><span id="ValidateResumeView.post-51"><a href="#ValidateResumeView.post-51"><span class="linenos">51</span></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">validation_service</span><span class="o">.</span><span class="n">validate_resume</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span><span id="ValidateResumeView.post-52"><a href="#ValidateResumeView.post-52"><span class="linenos">52</span></a>
-</span><span id="ValidateResumeView.post-53"><a href="#ValidateResumeView.post-53"><span class="linenos">53</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
-</span><span id="ValidateResumeView.post-54"><a href="#ValidateResumeView.post-54"><span class="linenos">54</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
-</span><span id="ValidateResumeView.post-55"><a href="#ValidateResumeView.post-55"><span class="linenos">55</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">error_message</span><span class="p">},</span>
-</span><span id="ValidateResumeView.post-56"><a href="#ValidateResumeView.post-56"><span class="linenos">56</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
-</span><span id="ValidateResumeView.post-57"><a href="#ValidateResumeView.post-57"><span class="linenos">57</span></a>            <span class="p">)</span>
-</span><span id="ValidateResumeView.post-58"><a href="#ValidateResumeView.post-58"><span class="linenos">58</span></a>
-</span><span id="ValidateResumeView.post-59"><a href="#ValidateResumeView.post-59"><span class="linenos">59</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ValidateResumeView.post-35"><a href="#ValidateResumeView.post-35"><span class="linenos">35</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+</span><span id="ValidateResumeView.post-36"><a href="#ValidateResumeView.post-36"><span class="linenos">36</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the uploaded resume file.</span>
+</span><span id="ValidateResumeView.post-37"><a href="#ValidateResumeView.post-37"><span class="linenos">37</span></a>
+</span><span id="ValidateResumeView.post-38"><a href="#ValidateResumeView.post-38"><span class="linenos">38</span></a><span class="sd">        Args:</span>
+</span><span id="ValidateResumeView.post-39"><a href="#ValidateResumeView.post-39"><span class="linenos">39</span></a><span class="sd">            request: The HTTP request object containing the file to validate.</span>
+</span><span id="ValidateResumeView.post-40"><a href="#ValidateResumeView.post-40"><span class="linenos">40</span></a>
+</span><span id="ValidateResumeView.post-41"><a href="#ValidateResumeView.post-41"><span class="linenos">41</span></a><span class="sd">        Returns:</span>
+</span><span id="ValidateResumeView.post-42"><a href="#ValidateResumeView.post-42"><span class="linenos">42</span></a><span class="sd">            Response with success status and optional error message.</span>
+</span><span id="ValidateResumeView.post-43"><a href="#ValidateResumeView.post-43"><span class="linenos">43</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="ValidateResumeView.post-44"><a href="#ValidateResumeView.post-44"><span class="linenos">44</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</span><span id="ValidateResumeView.post-45"><a href="#ValidateResumeView.post-45"><span class="linenos">45</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+</span><span id="ValidateResumeView.post-46"><a href="#ValidateResumeView.post-46"><span class="linenos">46</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+</span><span id="ValidateResumeView.post-47"><a href="#ValidateResumeView.post-47"><span class="linenos">47</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+</span><span id="ValidateResumeView.post-48"><a href="#ValidateResumeView.post-48"><span class="linenos">48</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
+</span><span id="ValidateResumeView.post-49"><a href="#ValidateResumeView.post-49"><span class="linenos">49</span></a>            <span class="p">)</span>
+</span><span id="ValidateResumeView.post-50"><a href="#ValidateResumeView.post-50"><span class="linenos">50</span></a>
+</span><span id="ValidateResumeView.post-51"><a href="#ValidateResumeView.post-51"><span class="linenos">51</span></a>        <span class="n">file</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">]</span>
+</span><span id="ValidateResumeView.post-52"><a href="#ValidateResumeView.post-52"><span class="linenos">52</span></a>        <span class="n">validation_service</span> <span class="o">=</span> <span class="n">ResumeValidationService</span><span class="p">()</span>
+</span><span id="ValidateResumeView.post-53"><a href="#ValidateResumeView.post-53"><span class="linenos">53</span></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">validation_service</span><span class="o">.</span><span class="n">validate_resume</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span><span id="ValidateResumeView.post-54"><a href="#ValidateResumeView.post-54"><span class="linenos">54</span></a>
+</span><span id="ValidateResumeView.post-55"><a href="#ValidateResumeView.post-55"><span class="linenos">55</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
+</span><span id="ValidateResumeView.post-56"><a href="#ValidateResumeView.post-56"><span class="linenos">56</span></a>            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+</span><span id="ValidateResumeView.post-57"><a href="#ValidateResumeView.post-57"><span class="linenos">57</span></a>                <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">error_message</span><span class="p">},</span>
+</span><span id="ValidateResumeView.post-58"><a href="#ValidateResumeView.post-58"><span class="linenos">58</span></a>                <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">,</span>
+</span><span id="ValidateResumeView.post-59"><a href="#ValidateResumeView.post-59"><span class="linenos">59</span></a>            <span class="p">)</span>
+</span><span id="ValidateResumeView.post-60"><a href="#ValidateResumeView.post-60"><span class="linenos">60</span></a>
+</span><span id="ValidateResumeView.post-61"><a href="#ValidateResumeView.post-61"><span class="linenos">61</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Validate the uploaded resume file.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    request: The HTTP request object containing the file to validate.</p>
 
-<ul>
-<li><strong>request:</strong>  The HTTP request object containing the file to validate.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>Response with success status and optional error message.</p>
-</blockquote>
+<p>Returns:
+    Response with success status and optional error message.</p>
 </div>
 
 
@@ -375,28 +394,29 @@
 
     </div>
     <a class="headerlink" href="#FetchJobsView"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="FetchJobsView-62"><a href="#FetchJobsView-62"><span class="linenos">62</span></a><span class="k">class</span><span class="w"> </span><span class="nc">FetchJobsView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
-</span><span id="FetchJobsView-63"><a href="#FetchJobsView-63"><span class="linenos">63</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch jobs endpoint.&quot;&quot;&quot;</span>
-</span><span id="FetchJobsView-64"><a href="#FetchJobsView-64"><span class="linenos">64</span></a>
-</span><span id="FetchJobsView-65"><a href="#FetchJobsView-65"><span class="linenos">65</span></a>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">FetchJobsSerializer</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="FetchJobsView-64"><a href="#FetchJobsView-64"><span class="linenos">64</span></a><span class="k">class</span><span class="w"> </span><span class="nc">FetchJobsView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+</span><span id="FetchJobsView-65"><a href="#FetchJobsView-65"><span class="linenos">65</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch jobs endpoint.&quot;&quot;&quot;</span>
 </span><span id="FetchJobsView-66"><a href="#FetchJobsView-66"><span class="linenos">66</span></a>
-</span><span id="FetchJobsView-67"><a href="#FetchJobsView-67"><span class="linenos">67</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
-</span><span id="FetchJobsView-68"><a href="#FetchJobsView-68"><span class="linenos">68</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch jobs from specified sources.</span>
-</span><span id="FetchJobsView-69"><a href="#FetchJobsView-69"><span class="linenos">69</span></a>
-</span><span id="FetchJobsView-70"><a href="#FetchJobsView-70"><span class="linenos">70</span></a><span class="sd">        Args:</span>
-</span><span id="FetchJobsView-71"><a href="#FetchJobsView-71"><span class="linenos">71</span></a><span class="sd">            request: The HTTP request object.</span>
-</span><span id="FetchJobsView-72"><a href="#FetchJobsView-72"><span class="linenos">72</span></a>
-</span><span id="FetchJobsView-73"><a href="#FetchJobsView-73"><span class="linenos">73</span></a><span class="sd">        Returns:</span>
-</span><span id="FetchJobsView-74"><a href="#FetchJobsView-74"><span class="linenos">74</span></a><span class="sd">            Response containing list of jobs.</span>
-</span><span id="FetchJobsView-75"><a href="#FetchJobsView-75"><span class="linenos">75</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="FetchJobsView-76"><a href="#FetchJobsView-76"><span class="linenos">76</span></a>        <span class="n">sources</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s2">&quot;sources&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;talentfair&quot;</span><span class="p">])</span>
-</span><span id="FetchJobsView-77"><a href="#FetchJobsView-77"><span class="linenos">77</span></a>
-</span><span id="FetchJobsView-78"><a href="#FetchJobsView-78"><span class="linenos">78</span></a>        <span class="n">service</span> <span class="o">=</span> <span class="n">JobFetchingService</span><span class="p">()</span>
-</span><span id="FetchJobsView-79"><a href="#FetchJobsView-79"><span class="linenos">79</span></a>        <span class="n">jobs</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">get_jobs</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
-</span><span id="FetchJobsView-80"><a href="#FetchJobsView-80"><span class="linenos">80</span></a>
-</span><span id="FetchJobsView-81"><a href="#FetchJobsView-81"><span class="linenos">81</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="FetchJobsView-82"><a href="#FetchJobsView-82"><span class="linenos">82</span></a>        <span class="n">serialized_data</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># type: ignore[reportUnknownVariableType]</span>
-</span><span id="FetchJobsView-83"><a href="#FetchJobsView-83"><span class="linenos">83</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serialized_data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+</span><span id="FetchJobsView-67"><a href="#FetchJobsView-67"><span class="linenos">67</span></a>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">FetchJobsSerializer</span>
+</span><span id="FetchJobsView-68"><a href="#FetchJobsView-68"><span class="linenos">68</span></a>
+</span><span id="FetchJobsView-69"><a href="#FetchJobsView-69"><span class="linenos">69</span></a>    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">AllowAny</span><span class="p">]</span>
+</span><span id="FetchJobsView-70"><a href="#FetchJobsView-70"><span class="linenos">70</span></a>
+</span><span id="FetchJobsView-71"><a href="#FetchJobsView-71"><span class="linenos">71</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+</span><span id="FetchJobsView-72"><a href="#FetchJobsView-72"><span class="linenos">72</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch jobs from specified sources.</span>
+</span><span id="FetchJobsView-73"><a href="#FetchJobsView-73"><span class="linenos">73</span></a>
+</span><span id="FetchJobsView-74"><a href="#FetchJobsView-74"><span class="linenos">74</span></a><span class="sd">        Args:</span>
+</span><span id="FetchJobsView-75"><a href="#FetchJobsView-75"><span class="linenos">75</span></a><span class="sd">            request: The HTTP request object.</span>
+</span><span id="FetchJobsView-76"><a href="#FetchJobsView-76"><span class="linenos">76</span></a>
+</span><span id="FetchJobsView-77"><a href="#FetchJobsView-77"><span class="linenos">77</span></a><span class="sd">        Returns:</span>
+</span><span id="FetchJobsView-78"><a href="#FetchJobsView-78"><span class="linenos">78</span></a><span class="sd">            Response containing list of jobs.</span>
+</span><span id="FetchJobsView-79"><a href="#FetchJobsView-79"><span class="linenos">79</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="FetchJobsView-80"><a href="#FetchJobsView-80"><span class="linenos">80</span></a>        <span class="n">sources</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s2">&quot;sources&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;talentfair&quot;</span><span class="p">])</span>
+</span><span id="FetchJobsView-81"><a href="#FetchJobsView-81"><span class="linenos">81</span></a>        <span class="n">service</span> <span class="o">=</span> <span class="n">JobFetchingService</span><span class="p">()</span>
+</span><span id="FetchJobsView-82"><a href="#FetchJobsView-82"><span class="linenos">82</span></a>        <span class="n">jobs</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">get_jobs</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
+</span><span id="FetchJobsView-83"><a href="#FetchJobsView-83"><span class="linenos">83</span></a>
+</span><span id="FetchJobsView-84"><a href="#FetchJobsView-84"><span class="linenos">84</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="FetchJobsView-85"><a href="#FetchJobsView-85"><span class="linenos">85</span></a>        <span class="n">serialized_data</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># type: ignore[reportUnknownVariableType]</span>
+</span><span id="FetchJobsView-86"><a href="#FetchJobsView-86"><span class="linenos">86</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serialized_data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -416,6 +436,18 @@
     
 
                             </div>
+                            <div id="FetchJobsView.permission_classes" class="classattr">
+                                <div class="attr variable">
+            <span class="name">permission_classes</span>        =
+<span class="default_value">[&lt;class &#39;rest_framework.permissions.AllowAny&#39;&gt;]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#FetchJobsView.permission_classes"></a>
+    
+    
+
+                            </div>
                             <div id="FetchJobsView.get" class="classattr">
                                         <input id="FetchJobsView.get-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
@@ -427,39 +459,32 @@
 
     </div>
     <a class="headerlink" href="#FetchJobsView.get"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="FetchJobsView.get-67"><a href="#FetchJobsView.get-67"><span class="linenos">67</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
-</span><span id="FetchJobsView.get-68"><a href="#FetchJobsView.get-68"><span class="linenos">68</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch jobs from specified sources.</span>
-</span><span id="FetchJobsView.get-69"><a href="#FetchJobsView.get-69"><span class="linenos">69</span></a>
-</span><span id="FetchJobsView.get-70"><a href="#FetchJobsView.get-70"><span class="linenos">70</span></a><span class="sd">        Args:</span>
-</span><span id="FetchJobsView.get-71"><a href="#FetchJobsView.get-71"><span class="linenos">71</span></a><span class="sd">            request: The HTTP request object.</span>
-</span><span id="FetchJobsView.get-72"><a href="#FetchJobsView.get-72"><span class="linenos">72</span></a>
-</span><span id="FetchJobsView.get-73"><a href="#FetchJobsView.get-73"><span class="linenos">73</span></a><span class="sd">        Returns:</span>
-</span><span id="FetchJobsView.get-74"><a href="#FetchJobsView.get-74"><span class="linenos">74</span></a><span class="sd">            Response containing list of jobs.</span>
-</span><span id="FetchJobsView.get-75"><a href="#FetchJobsView.get-75"><span class="linenos">75</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="FetchJobsView.get-76"><a href="#FetchJobsView.get-76"><span class="linenos">76</span></a>        <span class="n">sources</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s2">&quot;sources&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;talentfair&quot;</span><span class="p">])</span>
-</span><span id="FetchJobsView.get-77"><a href="#FetchJobsView.get-77"><span class="linenos">77</span></a>
-</span><span id="FetchJobsView.get-78"><a href="#FetchJobsView.get-78"><span class="linenos">78</span></a>        <span class="n">service</span> <span class="o">=</span> <span class="n">JobFetchingService</span><span class="p">()</span>
-</span><span id="FetchJobsView.get-79"><a href="#FetchJobsView.get-79"><span class="linenos">79</span></a>        <span class="n">jobs</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">get_jobs</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
-</span><span id="FetchJobsView.get-80"><a href="#FetchJobsView.get-80"><span class="linenos">80</span></a>
-</span><span id="FetchJobsView.get-81"><a href="#FetchJobsView.get-81"><span class="linenos">81</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="FetchJobsView.get-82"><a href="#FetchJobsView.get-82"><span class="linenos">82</span></a>        <span class="n">serialized_data</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># type: ignore[reportUnknownVariableType]</span>
-</span><span id="FetchJobsView.get-83"><a href="#FetchJobsView.get-83"><span class="linenos">83</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serialized_data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="FetchJobsView.get-71"><a href="#FetchJobsView.get-71"><span class="linenos">71</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+</span><span id="FetchJobsView.get-72"><a href="#FetchJobsView.get-72"><span class="linenos">72</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch jobs from specified sources.</span>
+</span><span id="FetchJobsView.get-73"><a href="#FetchJobsView.get-73"><span class="linenos">73</span></a>
+</span><span id="FetchJobsView.get-74"><a href="#FetchJobsView.get-74"><span class="linenos">74</span></a><span class="sd">        Args:</span>
+</span><span id="FetchJobsView.get-75"><a href="#FetchJobsView.get-75"><span class="linenos">75</span></a><span class="sd">            request: The HTTP request object.</span>
+</span><span id="FetchJobsView.get-76"><a href="#FetchJobsView.get-76"><span class="linenos">76</span></a>
+</span><span id="FetchJobsView.get-77"><a href="#FetchJobsView.get-77"><span class="linenos">77</span></a><span class="sd">        Returns:</span>
+</span><span id="FetchJobsView.get-78"><a href="#FetchJobsView.get-78"><span class="linenos">78</span></a><span class="sd">            Response containing list of jobs.</span>
+</span><span id="FetchJobsView.get-79"><a href="#FetchJobsView.get-79"><span class="linenos">79</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="FetchJobsView.get-80"><a href="#FetchJobsView.get-80"><span class="linenos">80</span></a>        <span class="n">sources</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s2">&quot;sources&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;talentfair&quot;</span><span class="p">])</span>
+</span><span id="FetchJobsView.get-81"><a href="#FetchJobsView.get-81"><span class="linenos">81</span></a>        <span class="n">service</span> <span class="o">=</span> <span class="n">JobFetchingService</span><span class="p">()</span>
+</span><span id="FetchJobsView.get-82"><a href="#FetchJobsView.get-82"><span class="linenos">82</span></a>        <span class="n">jobs</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">get_jobs</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
+</span><span id="FetchJobsView.get-83"><a href="#FetchJobsView.get-83"><span class="linenos">83</span></a>
+</span><span id="FetchJobsView.get-84"><a href="#FetchJobsView.get-84"><span class="linenos">84</span></a>        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="FetchJobsView.get-85"><a href="#FetchJobsView.get-85"><span class="linenos">85</span></a>        <span class="n">serialized_data</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># type: ignore[reportUnknownVariableType]</span>
+</span><span id="FetchJobsView.get-86"><a href="#FetchJobsView.get-86"><span class="linenos">86</span></a>        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serialized_data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Fetch jobs from specified sources.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    request: The HTTP request object.</p>
 
-<ul>
-<li><strong>request:</strong>  The HTTP request object.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>Response containing list of jobs.</p>
-</blockquote>
+<p>Returns:
+    Response containing list of jobs.</p>
 </div>
 
 
